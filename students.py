@@ -10,7 +10,7 @@ class Student:
     def add_courses(self, course_name):
         self.finished_courses.append(course_name)
 
-    def rate_lecture(self, lecturer, course, grade):
+    def rate_hw(self, lecturer, course, grade):
         if isinstance(lecturer, Lecturer) and course in self.finished_courses and course in self.courses_in_progress or course in lecturer.courses_attached:
 
             for course in lecturer.courses_attached:
@@ -25,21 +25,21 @@ class Student:
         self.courses_in_progress = ' '.join(self.courses_in_progress)
         self.finished_courses = ', '.join(self.finished_courses)
         return (f'Имя: {self.name}\nФамилия: {self.surname}\nПол: {self.gender}\nКурсы в процессе изучения: {self.courses_in_progress}\n'
-                f'Завершенные курсы: {self.finished_courses}\nСредняя оценка за домашние задания: {self.average_grades():.1f}\n')         
+                f'Завершенные курсы: {self.finished_courses}\nСредняя оценка за домашние задания: {self.average_grade():.1f}\n')         
 
-    def average_grades(self): 
+    def average_grade(self): 
         for grade in self.grades.values():
             average_s = sum(grade) / len(grade)
         return average_s
     
     def comparison_grade(self):
-        if student_1.average_grades() > student_2.average_grades() and student_1.average_grades() > student_3.average_grades():
-            print(f'Самая высокаая оценка: {student_1.average_grades():.1f}\nУ студента: {student_1.name} {student_1.surname}!\n')
-        elif student_2.average_grades() > student_3.average_grades() and student_2.average_grades() > student_1.average_grades():
-            print(f'Самая высокаая оценка: {student_2.average_grades():.1f}\nУ студента: {student_2.name} {student_2.surname}!\n')
-        elif student_3.average_grades() > student_1.average_grades() and student_3.average_grades() > student_2.average_grade():
-            print(f'Самая высокаая оценка: {student_3.average_grades():.1f}\nУ студента: {student_3.name} {student_3.surname}!\n')
-        elif student_1.average_grades() == student_2.average_grades() == student_3.average_grades():
+        if student_1.average_grade() > student_2.average_grade() and student_1.average_grade() > student_3.average_grade():
+            print(f'Самая высокаая оценка: {student_1.average_grade():.1f}\nУ студента: {student_1.name} {student_1.surname}!\n')
+        elif student_2.average_grade() > student_3.average_grade() and student_2.average_grade() > student_1.average_grade():
+            print(f'Самая высокаая оценка: {student_2.average_grade():.1f}\nУ студента: {student_2.name} {student_2.surname}!\n')
+        elif student_3.average_grade() > student_1.average_grade() and student_3.average_grade() > student_2.average_grade():
+            print(f'Самая высокаая оценка: {student_3.average_grade():.1f}\nУ студента: {student_3.name} {student_3.surname}!\n')
+        elif student_1.average_grade() == student_2.average_grade() == student_3.average_grade():
             print('Оценки студентов равны!')
    
 
@@ -106,27 +106,27 @@ lecturer_3.courses_attached = ['ООП']
 
 # student_1
 student_1 = Student('Игорь', 'Балабанов', 'мужской')
-student_1.rate_lecture(lecturer_1, 'Основы', 7)
-student_1.rate_lecture(lecturer_2, 'Git', 9)
-student_1.rate_lecture(lecturer_3, 'ООП',10)
+student_1.rate_hw(lecturer_1, 'Основы', 7)
+student_1.rate_hw(lecturer_2, 'Git', 9)
+student_1.rate_hw(lecturer_3, 'ООП',10)
 student_1.courses_in_progress += ['ООП']
 student_1.finished_courses += ['Основы']
 student_1.finished_courses += ['Git']
 
 #student_2
 student_2 = Student('Иван', 'Иванов', 'мужской')
-student_2.rate_lecture(lecturer_1, 'Основы', 6)
-student_2.rate_lecture(lecturer_2, 'Git',10)
-student_2.rate_lecture(lecturer_3,'ООП', 9 )
+student_2.rate_hw(lecturer_1, 'Основы', 6)
+student_2.rate_hw(lecturer_2, 'Git',10)
+student_2.rate_hw(lecturer_3,'ООП', 9 )
 student_2.courses_in_progress += ['ООП']
 student_2.finished_courses += ['Основы']
 student_2.finished_courses += ['Git']
 
 #student_3
 student_3 = Student('Юлия', 'Джумаева', 'женский')
-student_3.rate_lecture(lecturer_1, 'Основы', 4)
-student_3.rate_lecture(lecturer_2, 'Git',5)
-student_3.rate_lecture(lecturer_3,'ООП', 9 )
+student_3.rate_hw(lecturer_1, 'Основы', 4)
+student_3.rate_hw(lecturer_2, 'Git',5)
+student_3.rate_hw(lecturer_3,'ООП', 9 )
 student_3.courses_in_progress += ['ООП']
 student_3.finished_courses += ['Основы']
 student_3.finished_courses += ['Git']
