@@ -11,7 +11,7 @@ class Student:
         self.finished_courses.append(course_name)
 
     def rate_hw(self, lecturer, course, grade):
-        if isinstance(lecturer, Lecturer) and course in self.finished_courses and course in self.courses_in_progress or course in lecturer.courses_attached:
+        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached: 
 
             for course in lecturer.courses_attached:
                 if course in lecturer.rate_lecturer:
@@ -32,12 +32,29 @@ class Student:
             average_s = sum(grade) / len(grade)
         return average_s
     
-    def average_course_score_student(self):
-        course_score=[]
-        for course in self.finished_courses:
-            for grade in self.grades.values():
-                print(course,grade)
 
+    def average_course_score():
+        course_score = [student_1.grades, student_2.grades, student_3.grades]
+        cours_list = []
+        cour = []
+        course_1 = []
+        course_2 = []
+
+        for cours in course_score:
+            cours_list.append(list(cours.items())[0][1])
+            cour.append(list(cours.keys()))
+        course_1 = (cours_list[0][0], cours_list[1][0], cours_list[2][0]) 
+        course_2 = (cours_list[0][1], cours_list[1][1], cours_list[2][1])
+       
+        cour_0 = cour[0][0]
+        cour_1 = cour[1][1]
+        
+        average = sum(course_1)/len(course_1)
+        print(f'Средний балл на курсе: {cour_0} у студентов {average:.1f} баллов.')      
+
+        average = sum(course_2)/len(course_2)
+        print(f'Средний балл на курсе: {cour_1} у студентов {average:.1f} баллов.\n')    
+  
 
     def __gt__(self, other):
         print(self.average_grade() > other.average_grade())
@@ -66,8 +83,30 @@ class Lecturer(Mentor):
             average_l = sum(grade) / len(grade)   
         return average_l
     
-    def average_course_score_lectors():
-        pass
+    def average_course_score():
+        course_score = [lecturer_1.rate_lecturer, lecturer_2.rate_lecturer, lecturer_3.rate_lecturer]
+        cours_list = []   
+        cour = []
+        
+        for cours in course_score:
+            cours_list.append(list(cours.items())[0][1])
+            cour.append(list(cours.keys()))
+        course_1 = cours_list[0]
+        course_2 = cours_list[1]
+        course_3 = cours_list[2]
+      
+        cour[0] = ''.join(cour[0])
+        cour[1] = ''.join(cour[1])
+        cour[2] = ''.join(cour[2])
+        average = sum(course_1)/len(course_1)
+        print(f'Средний балл на курсе: {cour[0]} у перподавателей {average:.1f} баллов.')      
+
+        average = sum(course_2)/len(course_2)
+        print(f'Средний балл на курсе: {cour[1]} у преподавателей {average:.1f} баллов.')
+
+        average = sum(course_3)/len(course_3)
+        print(f'Средний балл на курсе: {cour[2]} у преподавателей {average:.1f} баллов.\n')
+
         
     def __str__(self):
         return (f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка: {self.average_grade():.1f}\n')
@@ -91,7 +130,7 @@ class Reviewer(Mentor):
          return (f'Имя:{self.name}\nФамилия: {self.surname}\n')    
 
     def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.finished_courses:
+        if isinstance(student, Student) and  course in student.finished_courses:
             
             for course in student.finished_courses:
                 if course in student.grades:
@@ -104,7 +143,7 @@ class Reviewer(Mentor):
       
 # Lecturer 1
 lecturer_1 = Lecturer('Олег', 'Булыгин')
-lecturer_1.courses_attached = 'Основы'
+lecturer_1.courses_attached = ['Основы']
 # Lecturer 2
 lecturer_2 = Lecturer('Алена', 'Батицкая')
 lecturer_2.courses_attached = ['Git']
@@ -172,4 +211,5 @@ Lecturer.__lt__(lecturer_2, lecturer_3)
 Student.__gt__(student_2, student_3)
 Student.__lt__(student_2, student_3)
 Student.__eq__(student_2, student_3)
-Student.average_course_score_student(student_1)
+Student.average_course_score()
+Lecturer.average_course_score()
