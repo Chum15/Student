@@ -32,17 +32,23 @@ class Student:
             average_s = sum(grade) / len(grade)
         return average_s
     
-    def comparison_grade(self):
-        if student_1.average_grade() > student_2.average_grade() and student_1.average_grade() > student_3.average_grade():
-            print(f'Самая высокаая оценка: {student_1.average_grade():.1f}\nУ студента: {student_1.name} {student_1.surname}!\n')
-        elif student_2.average_grade() > student_3.average_grade() and student_2.average_grade() > student_1.average_grade():
-            print(f'Самая высокаая оценка: {student_2.average_grade():.1f}\nУ студента: {student_2.name} {student_2.surname}!\n')
-        elif student_3.average_grade() > student_1.average_grade() and student_3.average_grade() > student_2.average_grade():
-            print(f'Самая высокаая оценка: {student_3.average_grade():.1f}\nУ студента: {student_3.name} {student_3.surname}!\n')
-        elif student_1.average_grade() == student_2.average_grade() == student_3.average_grade():
-            print('Оценки студентов равны!')
-   
+    def average_course_score_student(self):
+        course_score=[]
+        for course in self.finished_courses:
+            for grade in self.grades.values():
+                print(course,grade)
 
+
+    def __gt__(self, other):
+        print(self.average_grade() > other.average_grade())
+
+    def __lt__(self, other):
+        print(self.average_grade() < other.average_grade())
+
+    def __eq__(self, other):
+        print(self.average_grade == other.average_grade())
+                
+    
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -60,20 +66,21 @@ class Lecturer(Mentor):
             average_l = sum(grade) / len(grade)   
         return average_l
     
+    def average_course_score_lectors():
+        pass
         
     def __str__(self):
         return (f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка: {self.average_grade():.1f}\n')
     
    
-    def comparison_grade(self):
-        if lecturer_3.average_grade() > lecturer_2.average_grade() and lecturer_3.average_grade() > lecturer_1.average_grade():
-            print(f'Самая высокаая оценка: {lecturer_3.average_grade():.1f}\nУ преподавателя: {lecturer_3.name} {lecturer_3.surname}!\n')
-        elif lecturer_2.average_grade() > lecturer_3.average_grade() and lecturer_2.average_grade() > lecturer_1.average_grade():
-            print(f'Самая высокаая оценка: {lecturer_2.average_grade():.1f}\nУ преподавателя: {lecturer_2.name} {lecturer_2.surname}!\n')
-        elif lecturer_1.average_grade() > lecturer_2.average_grade() and lecturer_1.average_grade() > lecturer_3.average_grade():
-            print(f'Самая высокаая оценка: {lecturer_1.average_grade():.1f}\nУ преподавателя: {lecturer_1.name} {lecturer_1.surname}!\n')
-        elif lecturer_1.average_grade() == lecturer_2.average_grade() == lecturer_3.average_grade():
-            print('Оценки преподавателей равны!')          
+    def __gt__(self, other):
+        print(self.average_grade() > other.average_grade())
+
+    def __lt__(self, other):
+        print(self.average_grade() < other.average_grade())
+
+    def __eq__(self, other):
+        print(self.average_grade == other.average_grade())    
                 
        
 class Reviewer(Mentor):
@@ -94,6 +101,7 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
         
+      
 # Lecturer 1
 lecturer_1 = Lecturer('Олег', 'Булыгин')
 lecturer_1.courses_attached = 'Основы'
@@ -158,5 +166,10 @@ print('Преподаватели: \n')
 print(lecturer_1)
 print(lecturer_2)
 print(lecturer_3) 
-Lecturer.comparison_grade(lecturer_2)
-Student.comparison_grade(student_1)
+Lecturer.__eq__(lecturer_2, lecturer_3)
+Lecturer.__gt__(lecturer_2, lecturer_3)
+Lecturer.__lt__(lecturer_2, lecturer_3)
+Student.__gt__(student_2, student_3)
+Student.__lt__(student_2, student_3)
+Student.__eq__(student_2, student_3)
+Student.average_course_score_student(student_1)
